@@ -3,10 +3,80 @@
     class="min-h-[min] md:w-[600px] bg-slate-950 rounded-2xl py-4 md:py-10 px-4 mx-auto my-10 md:my-20 flex flex-col itewms-center"
   >
     <p class="text-xl md:text-2xl text-center font-bold py-5">
-      AssignFlow {{ isStudent ? "Student" : "Lecturer" }} Registration
+      AssignFlow
+      {{
+        isLogin
+          ? "Login"
+          : (isStudent ? "Student" : "Lecturer") + " Registration"
+      }}
     </p>
 
-    @if (isStudent) {
+    @if(isLogin){
+    <form
+      class="flex flex-col bg-transparent gap-5"
+      [formGroup]="userLoginForm"
+      (ngSubmit)="onSubmit('login')"
+    >
+      <!-- Contact -->
+      <div class="">
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Email</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="email"
+            placeholder="Email"
+          />
+        </fieldset>
+        <small
+          class="text-red-500"
+          *ngIf="
+            userLoginForm.controls['email'].hasError('pattern') &&
+            userLoginForm.controls['email'].touched
+          "
+        >
+          Invalid Email. Please enter a valid Email.
+        </small>
+      </div>
+
+      <!-- cpwd/pwd -->
+      <div>
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Password</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="password"
+            placeholder="Password"
+            type="password"
+          />
+        </fieldset>
+        <small
+          class="text-red-500"
+          *ngIf="
+            userLoginForm.controls['password'].hasError('required') &&
+            (userLoginForm.controls['password'].dirty ||
+              userLoginForm.controls['password'].touched)
+          "
+        >
+          Password is required.
+        </small>
+        <small
+          class="text-red-600"
+          *ngIf="userLoginForm.controls['password'].errors"
+        >
+          Password must be at least 8 characters long and include an uppercase
+          letter, a lowercase letter, a number, and a special character.
+        </small>
+      </div>
+
+      <button
+        [disabled]="!userLoginForm.valid"
+        class="btn btn-info py-6"
+        type="submit"
+      >
+        Login
+      </button>
+    </form>
+    } @else { @if (isStudent) {
     <!-- Student from -->
     <form
       class="flex flex-col bg-transparent gap-5"
@@ -17,21 +87,27 @@
       <div class="flex gap-4">
         <fieldset class="fieldset w-full">
           <legend class="fieldset-legend text-gray-200">
-            Select is your school
+            Select your school
           </legend>
-
           <select class="select w-full bg-transparent" formControlName="school">
-            <option disabled selected>Pick you school</option>
+            <option disabled selected>Pick your school</option>
             <option>CES</option>
             <option>EEE</option>
             <option>MBA</option>
           </select>
+          <small
+            class="text-red-500"
+            *ngIf="
+              studentRegistrationForm.controls['school'].hasError('required') &&
+              studentRegistrationForm.controls['school'].touched
+            "
+          >
+            School is required.
+          </small>
         </fieldset>
-        <fieldset class="fieldset w-full">
-          <legend class="fieldset-legend text-gray-200 w-full">
-            Select College
-          </legend>
 
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Select College</legend>
           <select
             class="select w-full bg-transparent"
             formControlName="college"
@@ -41,76 +117,140 @@
             <option>Business</option>
             <option>Arts</option>
           </select>
+          <small
+            class="text-red-500"
+            *ngIf="
+              studentRegistrationForm.controls['college'].hasError(
+                'required'
+              ) && studentRegistrationForm.controls['college'].touched
+            "
+          >
+            College is required.
+          </small>
         </fieldset>
       </div>
+
       <div class="flex gap-4">
         <fieldset class="fieldset w-full">
-          <legend class="fieldset-legend text-gray-200">
-            What year are you?
-          </legend>
+          <legend class="fieldset-legend text-gray-200">Year</legend>
           <select class="select w-full bg-transparent" formControlName="year">
-            <option disabled selected>Pick you year</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+            <option disabled selected>Pick your year</option>
+            <option *ngFor="let y of [1, 2, 3, 4, 5]">{{ y }}</option>
           </select>
+          <small
+            class="text-red-500"
+            *ngIf="
+              studentRegistrationForm.controls['year'].hasError('required') &&
+              studentRegistrationForm.controls['year'].touched
+            "
+          >
+            Year is required.
+          </small>
         </fieldset>
+
         <fieldset class="fieldset w-full">
-          <legend class="fieldset-legend text-gray-200">Select semester</legend>
+          <legend class="fieldset-legend text-gray-200">Semester</legend>
           <select
             class="select w-full bg-transparent"
             formControlName="semester"
           >
-            <option disabled selected>Pick you semester</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
+            <option disabled selected>Pick your semester</option>
+            <option *ngFor="let s of [1, 2, 3]">{{ s }}</option>
           </select>
+          <small
+            class="text-red-500"
+            *ngIf="
+              studentRegistrationForm.controls['semester'].hasError(
+                'required'
+              ) && studentRegistrationForm.controls['semester'].touched
+            "
+          >
+            Semester is required.
+          </small>
         </fieldset>
       </div>
-      <!-- school -->
+
+      <!-- Registration and Gender -->
       <div class="flex gap-4">
         <fieldset class="fieldset w-full">
           <legend class="fieldset-legend text-gray-200">
             Registration Number
           </legend>
-
           <input
             class="input w-full bg-transparent"
             formControlName="regNumber"
             placeholder="Registration Number"
+            type="text"
           />
+          <small
+            class="text-red-500"
+            *ngIf="
+              studentRegistrationForm.controls['regNumber'].hasError(
+                'required'
+              ) && studentRegistrationForm.controls['regNumber'].touched
+            "
+          >
+            Registration Number is required.
+          </small>
         </fieldset>
-        <fieldset class="fieldset w-full">
-          <legend class="fieldset-legend text-gray-200">Gender?</legend>
 
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Gender</legend>
           <select class="select w-full bg-transparent" formControlName="gender">
-            <option disabled selected>Pick you gender</option>
+            <option disabled selected>Pick your gender</option>
             <option>Male</option>
             <option>Female</option>
           </select>
+          <small
+            class="text-red-500"
+            *ngIf="
+              studentRegistrationForm.controls['gender'].hasError('required') &&
+              studentRegistrationForm.controls['gender'].touched
+            "
+          >
+            Gender is required.
+          </small>
         </fieldset>
       </div>
 
       <!-- Names -->
       <div class="flex gap-4">
         <fieldset class="fieldset w-full">
-          <legend class="fieldset-legend text-gray-200">First Name?</legend>
+          <legend class="fieldset-legend text-gray-200">First Name</legend>
           <input
             class="input w-full bg-transparent"
             formControlName="fName"
             placeholder="First Name"
+            type="text"
           />
+          <small
+            class="text-red-500"
+            *ngIf="
+              studentRegistrationForm.controls['fName'].hasError('required') &&
+              studentRegistrationForm.controls['fName'].touched
+            "
+          >
+            First Name is required.
+          </small>
         </fieldset>
+
         <fieldset class="fieldset w-full">
-          <legend class="fieldset-legend text-gray-200">Last Name?</legend>
+          <legend class="fieldset-legend text-gray-200">Last Name</legend>
           <input
             class="input w-full bg-transparent"
             formControlName="lName"
             placeholder="Last Name"
+            type="text"
           />
+          <small
+            class="text-red-500"
+            *ngIf="
+              studentRegistrationForm.controls['lName'].hasError('required') &&
+              studentRegistrationForm.controls['lName'].touched
+            "
+          >
+            Last Name is required.
+          </small>
         </fieldset>
       </div>
 
@@ -122,19 +262,41 @@
             class="input w-full bg-transparent"
             formControlName="email"
             placeholder="Email"
+            type="email"
           />
+          <small
+            class="text-red-500"
+            *ngIf="
+              studentRegistrationForm.controls['email'].hasError('pattern') &&
+              studentRegistrationForm.controls['email'].touched
+            "
+          >
+            Invalid Email. Please enter a valid Email.
+          </small>
         </fieldset>
+
         <fieldset class="fieldset w-full">
           <legend class="fieldset-legend text-gray-200">Phone Number</legend>
           <input
             class="input w-full bg-transparent"
             formControlName="phoneNumber"
             placeholder="Phone Number"
+            type="tel"
           />
+          <small
+            class="text-red-500"
+            *ngIf="
+              studentRegistrationForm.controls['phoneNumber'].hasError(
+                'pattern'
+              ) && studentRegistrationForm.controls['phoneNumber'].touched
+            "
+          >
+            Invalid phone number. Please enter a valid number.
+          </small>
         </fieldset>
       </div>
 
-      <!-- cpwd/pwd -->
+      <!-- Passwords -->
       <div class="flex gap-4">
         <fieldset class="fieldset w-full">
           <legend class="fieldset-legend text-gray-200">Password</legend>
@@ -144,6 +306,16 @@
             placeholder="Password"
             type="password"
           />
+          <small
+            class="text-red-500"
+            *ngIf="
+              studentRegistrationForm.controls['password'].hasError(
+                'required'
+              ) && studentRegistrationForm.controls['password'].touched
+            "
+          >
+            Password is required.
+          </small>
         </fieldset>
 
         <fieldset class="fieldset w-full">
@@ -156,11 +328,34 @@
             placeholder="Confirm Password"
             type="password"
           />
+          <small
+            class="text-red-500"
+            *ngIf="
+              studentRegistrationForm.controls['confirmPassword'].hasError(
+                'required'
+              ) && studentRegistrationForm.controls['confirmPassword'].touched
+            "
+          >
+            Confirm Password is required.
+          </small>
+          <small
+            class="text-red-600"
+            *ngIf="studentRegistrationForm.hasError('passwordMismatch')"
+          >
+            Passwords do not match.
+          </small>
         </fieldset>
       </div>
 
-      <button class="btn btn-info py-6" type="submit">Register Student</button>
+      <button
+        [disabled]="!studentRegistrationForm.valid"
+        class="btn btn-info py-6"
+        type="submit"
+      >
+        Register Student
+      </button>
     </form>
+
     } @else {
     <!-- Lecturer form -->
     <form
@@ -237,7 +432,7 @@
         <fieldset class="fieldset w-1/2">
           <legend class="fieldset-legend text-gray-200">Gender?</legend>
 
-          <select class="select" formControlName="gender">
+          <select class="select bg-transparent" formControlName="gender">
             <option disabled selected>Pick you gender</option>
             <option>Male</option>
             <option>Female</option>
@@ -245,14 +440,29 @@
         </fieldset>
         <fieldset class="fieldset w-1/2"></fieldset>
       </div>
-      <button class="btn btn-info py-6" type="submit">Register Lecturer</button>
+      <button
+        [disabled]="!lecturerRegistrationForm.valid"
+        class="btn btn-info py-6"
+        type="submit"
+      >
+        Register Lecturer
+      </button>
     </form>
-    }
-    <p
-      class="link link-hover text-gray-200 hover:link-info self-end text-sm py-5 px-3"
-      (click)="toggleStudent()"
-    >
-      Not a {{ isStudent ? "student" : "lecturer" }}?
-    </p>
+    } }
+    <div class="flex gap-4 justify-end">
+      <p
+        class="link link-hover text-gray-200 hover:link-info self-end text-sm py-5 px-3"
+        (click)="toggleLogin()"
+      >
+        {{ isLogin ? "Register" : "Login" }}
+      </p>
+      <p
+        [ngClass]="{ hidden: isLogin }"
+        class="link link-hover text-gray-200 hover:link-info self-end text-sm py-5 px-3"
+        (click)="toggleStudent()"
+      >
+        Not a {{ isStudent ? "student" : "lecturer" }}?
+      </p>
+    </div>
   </div>
 </section>
