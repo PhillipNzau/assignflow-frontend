@@ -30,30 +30,33 @@ export class AuthComponent {
 
   // Reusable function for common fields
   private createCommonForm(): FormGroup {
-    return this.fb.nonNullable.group({
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.pattern('[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]+'),
+    return this.fb.nonNullable.group(
+      {
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.email,
+            Validators.pattern('[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]+'),
+          ],
         ],
-      ],
-      password: [
-        '',
-        [Validators.required, Validators.minLength(6)],
-        this.passwordValidator,
-      ],
-      confirmPassword: [
-        '',
-        [Validators.required, Validators.minLength(6)],
-        this.passwordValidator,
-      ],
-      fName: ['', [Validators.required, Validators.minLength(3)]],
-      lName: ['', [Validators.required, Validators.minLength(3)]],
-      gender: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required]],
-    });
+        password: [
+          '',
+          [Validators.required, Validators.minLength(6)],
+          [this.passwordValidator.bind(this)],
+        ],
+        confirmPassword: [
+          '',
+          [Validators.required, Validators.minLength(6)],
+          [this.passwordValidator.bind(this)],
+        ],
+        fName: ['', [Validators.required, Validators.minLength(3)]],
+        lName: ['', [Validators.required, Validators.minLength(3)]],
+        gender: ['', [Validators.required]],
+        phoneNumber: ['', [Validators.required]],
+      },
+      { validators: passwordMatchValidator() }
+    );
   }
 
   // Student registration form
