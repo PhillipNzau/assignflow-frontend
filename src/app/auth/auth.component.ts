@@ -9,7 +9,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { HotToastService } from '@ngneat/hot-toast';
+import { HotToastService } from '@ngxpert/hot-toast';
 import { Router } from '@angular/router';
 
 @Component({
