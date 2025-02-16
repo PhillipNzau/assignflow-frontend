@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HotToastService } from '@ngxpert/hot-toast';
+
 
 @Component({
     selector: 'app-root',
@@ -9,4 +11,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'assignflow';
+
+   private toastService = inject(HotToastService);
+
+  showToast() {
+    this.toastService.show('Hello World!')
+  }
 }
