@@ -3,10 +3,80 @@
     class="min-h-[min] md:w-[600px] bg-slate-950 rounded-2xl py-4 md:py-10 px-4 mx-auto my-10 md:my-20 flex flex-col itewms-center"
   >
     <p class="text-xl md:text-2xl text-center font-bold py-5">
-      AssignFlow {{ isStudent ? "Student" : "Lecturer" }} Registration
+      AssignFlow
+      {{
+        isLogin
+          ? "Login"
+          : (isStudent ? "Student" : "Lecturer") + " Registration"
+      }}
     </p>
 
-    @if (isStudent) {
+    @if(isLogin){
+    <form
+      class="flex flex-col bg-transparent gap-5"
+      [formGroup]="userLoginForm"
+      (ngSubmit)="onSubmit('login')"
+    >
+      <!-- Contact -->
+      <div class="">
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Email</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="email"
+            placeholder="Email"
+          />
+        </fieldset>
+        <small
+          class="text-red-500"
+          *ngIf="
+            userLoginForm.controls['email'].hasError('pattern') &&
+            userLoginForm.controls['email'].touched
+          "
+        >
+          Invalid Email. Please enter a valid Email.
+        </small>
+      </div>
+
+      <!-- cpwd/pwd -->
+      <div>
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Password</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="password"
+            placeholder="Password"
+            type="password"
+          />
+        </fieldset>
+        <small
+          class="text-red-500"
+          *ngIf="
+            userLoginForm.controls['password'].hasError('required') &&
+            (userLoginForm.controls['password'].dirty ||
+              userLoginForm.controls['password'].touched)
+          "
+        >
+          Password is required.
+        </small>
+        <small
+          class="text-red-600"
+          *ngIf="userLoginForm.controls['password'].errors"
+        >
+          Password must be at least 8 characters long and include an uppercase
+          letter, a lowercase letter, a number, and a special character.
+        </small>
+      </div>
+
+      <button
+        [disabled]="!userLoginForm.valid"
+        class="btn btn-info py-6"
+        type="submit"
+      >
+        Login
+      </button>
+    </form>
+    } @else { @if (isStudent) {
     <!-- Student from -->
     <form
       class="flex flex-col bg-transparent gap-5"
@@ -247,12 +317,21 @@
       </div>
       <button class="btn btn-info py-6" type="submit">Register Lecturer</button>
     </form>
-    }
-    <p
-      class="link link-hover text-gray-200 hover:link-info self-end text-sm py-5 px-3"
-      (click)="toggleStudent()"
-    >
-      Not a {{ isStudent ? "student" : "lecturer" }}?
-    </p>
+    } }
+    <div class="flex gap-4 justify-end">
+      <p
+        class="link link-hover text-gray-200 hover:link-info self-end text-sm py-5 px-3"
+        (click)="toggleLogin()"
+      >
+        {{ isLogin ? "Register" : "Login" }}
+      </p>
+      <p
+        [ngClass]="{ hidden: isLogin }"
+        class="link link-hover text-gray-200 hover:link-info self-end text-sm py-5 px-3"
+        (click)="toggleStudent()"
+      >
+        Not a {{ isStudent ? "student" : "lecturer" }}?
+      </p>
+    </div>
   </div>
 </section>

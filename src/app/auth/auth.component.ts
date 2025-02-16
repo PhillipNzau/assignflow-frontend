@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { Router } from '@angular/router';
+import { passwordMatchValidator } from './service/password-validator.service';
 
 @Component({
   selector: 'app-auth',
@@ -20,6 +21,7 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent {
   isStudent: boolean = true;
+  isLogin: boolean = false;
 
   authService = inject(AuthService);
   toastService = inject(HotToastService);
@@ -29,9 +31,24 @@ export class AuthComponent {
   // Reusable function for common fields
   private createCommonForm(): FormGroup {
     return this.fb.nonNullable.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]+'),
+        ],
+      ],
+      password: [
+        '',
+        [Validators.required, Validators.minLength(6)],
+        this.passwordValidator,
+      ],
+      confirmPassword: [
+        '',
+        [Validators.required, Validators.minLength(6)],
+        this.passwordValidator,
+      ],
       fName: ['', [Validators.required, Validators.minLength(3)]],
       lName: ['', [Validators.required, Validators.minLength(3)]],
       gender: ['', [Validators.required]],
@@ -55,6 +72,78 @@ export class AuthComponent {
   // Lecturer registration form
   lecturerRegistrationForm = this.createCommonForm();
 
+  // Login form
+  userLoginForm = this.fb.nonNullable.group(
+    {
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]+'),
+        ],
+      ],
+      password: [
+        '',
+        [Validators.required, Validators.minLength(6)],
+        [this.passwordValidator.bind(this)],
+      ],
+    }
+    // { validators: passwordMatchValidator() }
+  );
+
+  // Password Validator to check if password has a blank
+  passwordValidator(
+    control: AbstractControl
+  ): Promise<ValidationErrors | null> {
+    const value: string = control.value;
+
+    return new Promise((resolve) => {
+      if (!value) {
+        resolve(null);
+        return;
+      }
+
+      const errors: ValidationErrors = {};
+
+      if (/\s/.test(value)) {
+        errors['containsSpace'] = true;
+      }
+      if (!/[A-Z]/.test(value)) {
+        errors['missingUppercase'] = true;
+      }
+      if (!/[0-9]/.test(value)) {
+        errors['missingNumber'] = true;
+      }
+      if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+        errors['missingSpecialChar'] = true;
+      }
+
+      resolve(Object.keys(errors).length > 0 ? errors : null);
+    });
+  }
+
+  toggleStudent() {
+    this.isStudent = !this.isStudent;
+  }
+  toggleLogin() {
+    this.isLogin = !this.isLogin;
+  }
+
+  onSubmit(type: string): void {
+    if (type === 'student') {
+      console.log('Student Form Submitted', this.studentRegistrationForm.value);
+    } else if (type === 'login') {
+      console.log('Login Form Submitted', this.userLoginForm.value);
+    } else {
+      console.log(
+        'Lecturer Form Submitted',
+        this.lecturerRegistrationForm.value
+      );
+    }
+  }
+
+  // simulate Submitted
   submit() {
     const data = {
       email: 'this.email',
@@ -68,19 +157,5 @@ export class AuthComponent {
         console.error(error);
       },
     });
-  }
-
-  toggleStudent() {
-    this.isStudent = !this.isStudent;
-  }
-  onSubmit(type: string): void {
-    if (type === 'student') {
-      console.log('Student Form Submitted', this.studentRegistrationForm.value);
-    } else {
-      console.log(
-        'Lecturer Form Submitted',
-        this.lecturerRegistrationForm.value
-      );
-    }
   }
 }
