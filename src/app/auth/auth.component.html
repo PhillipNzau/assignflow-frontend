@@ -1,0 +1,47 @@
+ <!-- <form [formGroup]="studentRegistrationForm" (ngSubmit)="onSubmit('student')">
+      <input formControlName="email" placeholder="Email" />
+      <input formControlName="password" placeholder="Password" type="password" />
+      <input formControlName="fName" placeholder="First Name" />
+      <input formControlName="lName" placeholder="Last Name" />
+      <input formControlName="gender" placeholder="Gender" />
+      <input formControlName="phoneNumber" placeholder="Phone Number" />
+      <input formControlName="regNumber" placeholder="Registration Number" />
+      <input formControlName="school" placeholder="School" />
+      <input formControlName="college" placeholder="College" />
+      <input formControlName="year" placeholder="Year" />
+      <button type="submit">Register Student</button>
+    </form>
+
+    <form [formGroup]="lecturerRegistrationForm" (ngSubmit)="onSubmit('lecturer')">
+      <input formControlName="email" placeholder="Email" />
+      <input formControlName="password" placeholder="Password" type="password" />
+      <input formControlName="fName" placeholder="First Name" />
+      <input formControlName="lName" placeholder="Last Name" />
+      <input formControlName="gender" placeholder="Gender" />
+      <input formControlName="phoneNumber" placeholder="Phone Number" />
+      <button type="submit">Register Lecturer</button>
+    </form> -->
+
+    <div class="min-h-min w-[500px] bg-gray-800 rounded-2xl py-4 px-3">
+    <form class="flex flex-col bg-transparent" [formGroup]="studentRegistrationForm" (ngSubmit)="onSubmit('student')">
+      <fieldset class="fieldset">
+  <legend class="fieldset-legend">What is your name?</legend>
+   <input class="input" formControlName="email" placeholder="Email" />
+  <p class="fieldset-label">Optional</p>
+</fieldset>
+       
+      <input formControlName="password" placeholder="Password" type="password" />
+      <input formControlName="fName" placeholder="First Name" />
+      <input formControlName="lName" placeholder="Last Name" />
+      <input formControlName="gender" placeholder="Gender" />
+      <input formControlName="phoneNumber" placeholder="Phone Number" />
+      <input formControlName="regNumber" placeholder="Registration Number" />
+      <input formControlName="school" placeholder="School" />
+      <input formControlName="college" placeholder="College" />
+      <input formControlName="year" placeholder="Year" />
+      <button type="submit">Register Student</button>
+    </form>
+
+
+
+    </div>
