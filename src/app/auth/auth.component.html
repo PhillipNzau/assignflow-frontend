@@ -1,0 +1,258 @@
+<section class="flex min-h-screen w-full flex-col items-center px-6 md:py-14">
+  <div
+    class="min-h-[min] md:w-[600px] bg-slate-950 rounded-2xl py-4 md:py-10 px-4 mx-auto my-10 md:my-20 flex flex-col itewms-center"
+  >
+    <p class="text-xl md:text-2xl text-center font-bold py-5">
+      AssignFlow {{ isStudent ? "Student" : "Lecturer" }} Registration
+    </p>
+
+    @if (isStudent) {
+    <!-- Student from -->
+    <form
+      class="flex flex-col bg-transparent gap-5"
+      [formGroup]="studentRegistrationForm"
+      (ngSubmit)="onSubmit('student')"
+    >
+      <!-- College/semester -->
+      <div class="flex gap-4">
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">
+            Select is your school
+          </legend>
+
+          <select class="select w-full bg-transparent" formControlName="school">
+            <option disabled selected>Pick you school</option>
+            <option>CES</option>
+            <option>EEE</option>
+            <option>MBA</option>
+          </select>
+        </fieldset>
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200 w-full">
+            Select College
+          </legend>
+
+          <select
+            class="select w-full bg-transparent"
+            formControlName="college"
+          >
+            <option disabled selected>Pick a college</option>
+            <option>Engineering</option>
+            <option>Business</option>
+            <option>Arts</option>
+          </select>
+        </fieldset>
+      </div>
+      <div class="flex gap-4">
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">
+            What year are you?
+          </legend>
+          <select class="select w-full bg-transparent" formControlName="year">
+            <option disabled selected>Pick you year</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </fieldset>
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Select semester</legend>
+          <select
+            class="select w-full bg-transparent"
+            formControlName="semester"
+          >
+            <option disabled selected>Pick you semester</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </fieldset>
+      </div>
+      <!-- school -->
+      <div class="flex gap-4">
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">
+            Registration Number
+          </legend>
+
+          <input
+            class="input w-full bg-transparent"
+            formControlName="regNumber"
+            placeholder="Registration Number"
+          />
+        </fieldset>
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Gender?</legend>
+
+          <select class="select w-full bg-transparent" formControlName="gender">
+            <option disabled selected>Pick you gender</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </fieldset>
+      </div>
+
+      <!-- Names -->
+      <div class="flex gap-4">
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">First Name?</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="fName"
+            placeholder="First Name"
+          />
+        </fieldset>
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Last Name?</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="lName"
+            placeholder="Last Name"
+          />
+        </fieldset>
+      </div>
+
+      <!-- Contact -->
+      <div class="flex gap-4">
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Email</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="email"
+            placeholder="Email"
+          />
+        </fieldset>
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Phone Number</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="phoneNumber"
+            placeholder="Phone Number"
+          />
+        </fieldset>
+      </div>
+
+      <!-- cpwd/pwd -->
+      <div class="flex gap-4">
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Password</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="password"
+            placeholder="Password"
+            type="password"
+          />
+        </fieldset>
+
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">
+            Confirm Password
+          </legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="confirmPassword"
+            placeholder="Confirm Password"
+            type="password"
+          />
+        </fieldset>
+      </div>
+
+      <button class="btn btn-info py-6" type="submit">Register Student</button>
+    </form>
+    } @else {
+    <!-- Lecturer form -->
+    <form
+      class="flex flex-col bg-transparent gap-5"
+      [formGroup]="lecturerRegistrationForm"
+      (ngSubmit)="onSubmit('lecturer')"
+    >
+      <!-- Names -->
+      <div class="flex gap-4">
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">First Name?</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="fName"
+            placeholder="First Name"
+          />
+        </fieldset>
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Last Name?</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="lName"
+            placeholder="Last Name"
+          />
+        </fieldset>
+      </div>
+      <!-- Contact -->
+      <div class="flex gap-4">
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Email</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="email"
+            placeholder="Email"
+          />
+        </fieldset>
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Phone Number</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="phoneNumber"
+            placeholder="Phone Number"
+          />
+        </fieldset>
+      </div>
+
+      <!-- cpwd/pwd -->
+      <div class="flex gap-4">
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Password</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="password"
+            placeholder="Password"
+            type="password"
+          />
+        </fieldset>
+
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">
+            Confirm Password
+          </legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="confirmPassword"
+            placeholder="Confirm Password"
+            type="password"
+          />
+        </fieldset>
+      </div>
+
+      <!-- gender -->
+      <div class="flex gap-4">
+        <fieldset class="fieldset w-1/2">
+          <legend class="fieldset-legend text-gray-200">Gender?</legend>
+
+          <select class="select" formControlName="gender">
+            <option disabled selected>Pick you gender</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </fieldset>
+        <fieldset class="fieldset w-1/2"></fieldset>
+      </div>
+      <button class="btn btn-info py-6" type="submit">Register Lecturer</button>
+    </form>
+    }
+    <p
+      class="link link-hover text-gray-200 hover:link-info self-end text-sm py-5 px-3"
+      (click)="toggleStudent()"
+    >
+      Not a {{ isStudent ? "student" : "lecturer" }}?
+    </p>
+  </div>
+</section>
