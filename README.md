@@ -1,27 +1,62 @@
-# Assignflow
+# AssignFlow
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+**AssignFlow** is a front-end platform designed to streamline the creation, distribution, and submission of assignments for lecturers and students. The platform enables lecturers to upload assignment PDFs, set submission deadlines, generate shareable links, and track submissions (including revenue per submission). Students can download assignments, complete them, and submit their work back as PDFs—with an automatic cost calculation based on page count.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **User Authentication:**
 
-## Code scaffolding
+  - Registration and login for both lecturers and students.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Lecturer Dashboard:**
 
-## Build
+  - Create assignments with PDF uploads and deadline settings.
+  - Auto-generated shareable assignment links.
+  - View all created assignments, submission counts, and revenue summaries.
+  - Download submitted assignments.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Student Portal:**
 
-## Running unit tests
+  - View and download available assignments.
+  - Submit completed assignments as PDFs.
+  - Automatic page count of submitted PDFs with printing cost calculation .
+  - Track submission history and view payment statuses.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Deadline Enforcement:**
+  - UI disables submission options once the assignment deadline has passed.
 
-## Running end-to-end tests
+## Tech Stack
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- **Framework:** Angular
+- **Styling:** CSS/SCSS Tailwind CSS
+- **Routing:** Angular Routing
+- **State Management:** NgRx
+- **PDF Handling:** Library to count pages in PDFs (e.g., [pdf.js](https://mozilla.github.io/pdf.js/))
+- **Testing:** Jest, Cypress
 
-## Further help
+## Installation & Setup
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/yourusername/assignflow-frontend.git
+   cd assignflow-frontend
+   ```
+
+2. **Install Dependencies:**
+
+   ```bash
+   npm install or yarn install or bun install
+   ```
+
+3. **Run the Development Server:**
+
+   ```bash
+   npm start or yarn start or bun start
+   ```
+
+4. **Build for Production:**
+
+   ```bash
+   npm run build or yarn build or bun run build
+   ```
