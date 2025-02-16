@@ -7,14 +7,14 @@ export const routes: Routes = [
     component: AuthComponent,
     // canActivate: [() => !inject(AuthService).isLoggedIn],
   },
-//   {
-//     path: '',
-//     loadChildren: () =>
-//       import('./dashboard/dashboard.routes').then(
-//         (mod) => mod.DASHBOARD_ROUTES,
-//       ),
-//     canActivate: [() => inject(AuthService).isLoggedIn],
-//   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./dashboard/dashboard.routes').then(
+        (mod) => mod.DASHBOARD_ROUTES
+      ),
+    // canActivate: [() => inject(AuthService).isLoggedIn],
+  },
   {
     path: '**',
     component: AuthComponent,
