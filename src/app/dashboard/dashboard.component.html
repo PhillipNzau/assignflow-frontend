@@ -1,0 +1,50 @@
+<section class="drawer flex">
+  <!-- Laptop Sidebar -->
+  <div class="hidden md:block"><app-side-nav /></div>
+
+  <!-- Mobile Drawer Toggle -->
+  <input
+    id="my-drawer"
+    type="checkbox"
+    class="drawer-toggle"
+    (change)="toggleMenu()"
+  />
+
+  <div class="drawer-content flex flex-col items-centers w-screen">
+    <!-- Mobile Drawer Button (Visible Only on Mobile) -->
+    <label
+      for="my-drawer"
+      class="flex items-center justify-between p-5 bg-slate-900 drawer-button md:hidden"
+    >
+      <p class="text-2xl font-bold">AssignFlow</p>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="36"
+        height="36"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="0.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path [attr.d]="isMenuOpen ? 'm15 18-6-6 6-6' : 'm9 18 6-6-6-6'" />
+      </svg>
+    </label>
+
+    <!-- Main Page Content -->
+    <div class="p-5">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div class="drawer-side md:hidden">
+    <label
+      for="my-drawer"
+      aria-label="close sidebar"
+      class="drawer-overlay"
+    ></label>
+    <app-side-nav />
+  </div>
+</section>

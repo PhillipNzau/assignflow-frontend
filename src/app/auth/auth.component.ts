@@ -136,13 +136,16 @@ export class AuthComponent {
   onSubmit(type: string): void {
     if (type === 'student') {
       console.log('Student Form Submitted', this.studentRegistrationForm.value);
+      this.route.navigate(['/']);
     } else if (type === 'login') {
       console.log('Login Form Submitted', this.userLoginForm.value);
+      this.route.navigate(['/']);
     } else {
       console.log(
         'Lecturer Form Submitted',
         this.lecturerRegistrationForm.value
       );
+      this.route.navigate(['/']);
     }
   }
 
