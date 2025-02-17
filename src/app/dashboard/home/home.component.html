@@ -138,4 +138,49 @@
   </div>
 
   <!-- chart section -->
+  <div class="flex flex-col md:flex-row gap-5">
+    <div
+      class="bg-gray-950 text-gray-500 rounded-md shadow-xl py-5 px-5 w-full lg:w-1/2"
+    >
+      <div class="flex flex-wrap items-end">
+        <div class="flex-1">
+          <h3 class="text-base font-semibold leading-tight">
+            Submitted Assignments
+          </h3>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-end mb-5">
+        <h4
+          class="text-2xl lg:text-3xl text-white font-semibold leading-tight inline-block mr-2"
+        >
+          239
+        </h4>
+      </div>
+      <div>
+        <canvas id="chart" class="w-full">{{ chart }}</canvas>
+      </div>
+    </div>
+
+    <div
+      class="bg-gray-950 text-gray-500 rounded-md shadow-xl py-5 px-5 w-full lg:w-1/2"
+    >
+      <div class="flex flex-wrap items-end">
+        <div class="flex-1">
+          <h3 class="text-base font-semibold leading-tight">
+            Submitted Assignments
+          </h3>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-end mb-5">
+        <h4
+          class="text-2xl lg:text-3xl text-white font-semibold leading-tight inline-block mr-2"
+        >
+          239
+        </h4>
+      </div>
+      <div>
+        <canvas id="canvas" class="w-full">{{ canvas }}</canvas>
+      </div>
+    </div>
+  </div>
 </section>

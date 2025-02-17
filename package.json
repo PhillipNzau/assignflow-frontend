@@ -24,6 +24,7 @@
     "@ngneat/overview": "6.1.1",
     "@ngxpert/hot-toast": "^4.1.1",
     "@tailwindcss/postcss": "^4.0.6",
+    "chart.js": "^4.4.7",
     "express": "^4.18.2",
     "postcss": "^8.5.2",
     "rxjs": "~7.8.0",
