@@ -1,0 +1,201 @@
+<ul
+  class="menu bg-slate-950 rounded-box h-screen flex flex-col justify-between py-5 w-[300px]"
+>
+  <div class="space-y-2">
+    <li
+      class="rounded-md"
+      [ngClass]="{
+            'text-darkGreen bg-slate-900 border-b border-b-slate-600 font-semibold ':
+              isRouteActive('/dashboard'),
+            'border-b-transparent': !isRouteActive('/dashboard'),
+          }"
+      routerLink="/dashboard"
+    >
+      <a class="flex gap-5 items-center py-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="0.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+          <path
+            d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+          />
+        </svg>
+        <p class="text-base">Home</p>
+      </a>
+    </li>
+    <li
+      class="rounded-md"
+      [ngClass]="{
+            'text-darkGreen bg-slate-900 border-b border-b-slate-600 font-semibold ':
+              isRouteActive('/assignments'),
+            'border-b-transparent': !isRouteActive('/assignments'),
+          }"
+      routerLink="/assignments"
+    >
+      <a class="flex gap-5 items-center py-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="0.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-notebook-pen"
+        >
+          <path
+            d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"
+          />
+          <path d="M2 6h4" />
+          <path d="M2 10h4" />
+          <path d="M2 14h4" />
+          <path d="M2 18h4" />
+          <path
+            d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"
+          />
+        </svg>
+        <p class="text-base">Assignments</p>
+      </a>
+    </li>
+    <li
+      class="rounded-md"
+      [ngClass]="{
+            'text-darkGreen bg-slate-900 border-b border-b-slate-600 font-semibold ':
+              isRouteActive('/payments'),
+            'border-b-transparent': !isRouteActive('/payments'),
+          }"
+      routerLink="/payments"
+    >
+      <a class="flex gap-5 items-center py-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="0.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-hand-coins"
+        >
+          <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17" />
+          <path
+            d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"
+          />
+          <path d="m2 16 6 6" />
+          <circle cx="16" cy="9" r="2.9" />
+          <circle cx="6" cy="5" r="3" />
+        </svg>
+        <p class="text-base">Payments</p>
+      </a>
+    </li>
+    <li
+      class="rounded-md"
+      [ngClass]="{
+            'text-darkGreen bg-slate-900 border-b border-b-slate-600 font-semibold ':
+              isRouteActive('/notifications'),
+            'border-b-transparent': !isRouteActive('/notifications'),
+          }"
+      routerLink="/notifications"
+    >
+      <a class="flex gap-5 items-center py-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="0.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-bell-ring"
+        >
+          <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+          <path d="M22 8c0-2.3-.8-4.3-2-6" />
+          <path
+            d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+          />
+          <path d="M4 2C2.8 3.7 2 5.7 2 8" />
+        </svg>
+        <p class="text-base">Notificaitions</p>
+        <span class="badge badge-sm badge-warning">99+</span>
+      </a>
+    </li>
+  </div>
+
+  <div class="space-y-2">
+    <li
+      class="rounded-md"
+      [ngClass]="{
+            'text-darkGreen bg-slate-900 border-b border-b-slate-600 font-semibold ':
+              isRouteActive('/profile'),
+            'border-b-transparent': !isRouteActive('/profile'),
+          }"
+      routerLink="/profile"
+    >
+      <a class="flex gap-5 items-center py-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="0.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-user-round-cog"
+        >
+          <path d="M2 21a8 8 0 0 1 10.434-7.62" />
+          <circle cx="10" cy="8" r="5" />
+          <circle cx="18" cy="18" r="3" />
+          <path d="m19.5 14.3-.4.9" />
+          <path d="m16.9 20.8-.4.9" />
+          <path d="m21.7 19.5-.9-.4" />
+          <path d="m15.2 16.9-.9-.4" />
+          <path d="m21.7 16.5-.9.4" />
+          <path d="m15.2 19.1-.9.4" />
+          <path d="m19.5 21.7-.4-.9" />
+          <path d="m16.9 15.2-.4-.9" />
+        </svg>
+        <p class="text-base">Profile</p>
+      </a>
+    </li>
+    <li
+      class="rounded-md hover:bg-slate-900 hover:border-b hover:border-b-slate-600 hover:font-semibold"
+      (click)="logOut()"
+    >
+      <a class="flex gap-5 items-center py-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="0.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-log-out"
+        >
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <polyline points="16 17 21 12 16 7" />
+          <line x1="21" x2="9" y1="12" y2="12" />
+        </svg>
+        <p class="text-base">Logout</p>
+      </a>
+    </li>
+  </div>
+</ul>
