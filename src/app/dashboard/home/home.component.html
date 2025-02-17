@@ -138,9 +138,9 @@
   </div>
 
   <!-- chart section -->
-  <div class="flex flex-col md:flex-row gap-5">
+  <div class="flex flex-col md:flex-row gap-8">
     <div
-      class="bg-gray-950 text-gray-500 rounded-md shadow-xl py-5 px-5 w-full lg:w-1/2"
+      class="bg-slate-950 text-gray-600 rounded-md shadow-xl py-5 px-5 w-full lg:w-1/2"
     >
       <div class="flex flex-wrap items-end">
         <div class="flex-1">
@@ -162,7 +162,7 @@
     </div>
 
     <div
-      class="bg-gray-950 text-gray-500 rounded-md shadow-xl py-5 px-5 w-full lg:w-1/2"
+      class="bg-slate-950 text-gray-600 rounded-md shadow-xl py-5 px-5 w-full lg:w-1/2"
     >
       <div class="flex flex-wrap items-end">
         <div class="flex-1">
@@ -181,6 +181,51 @@
       <div>
         <canvas id="canvas" class="w-full">{{ canvas }}</canvas>
       </div>
+    </div>
+  </div>
+
+  <!-- table section -->
+  <div class="bg-slate-950 rounded-md px-4 py-5 w-full">
+    <!-- header -->
+    <div class="flex items-center justify-between pb-6">
+      <p class="text-base">Submitted Assignments</p>
+      <p class="text-xs bg-slate-900 py-2 px-3 rounded-md hover:cursor-pointer">
+        View All
+      </p>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="table">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Status</th>
+            <th>File</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(item of [1,2,3,4,5]; track item){
+          <tr class="hover:bg-slate-900 text-gray-300">
+            <td>{{ item }}</td>
+            <td>John Doe</td>
+            <td>Computer science</td>
+            <td>
+              <span class="bg-success rounded-full p-2 text-xs text-gray-600"
+                >submitted</span
+              >
+            </td>
+            <td>file-name.pdf</td>
+            <td class="hover:cursor-pointer">
+              <span class="bg-slate-800 rounded-md px-4 p-2 text-xs">View</span>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
