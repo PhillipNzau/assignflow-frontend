@@ -9,4 +9,9 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent {}
+export class DashboardComponent {
+  isMenuOpen: boolean = false;
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+}
