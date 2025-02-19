@@ -34,6 +34,13 @@ export const DASHBOARD_ROUTES: Route[] = [
           ),
       },
       {
+        path: 'assignments/create',
+        loadComponent: () =>
+          import(
+            './assignments/components/create-assignements/create-assignements.component'
+          ).then((m) => m.CreateAssignementsComponent),
+      },
+      {
         path: 'notifications',
         loadComponent: () =>
           import('./notifications/notifications.component').then(

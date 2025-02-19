@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
@@ -25,8 +24,6 @@ export class AssignFlowTableComponent {
 
   @Output() searchChange = new EventEmitter<string>();
 
-  sanitizer = inject(DomSanitizer);
-
   searchTerm: string = '';
   currentPage: number = 1;
 
@@ -40,11 +37,5 @@ export class AssignFlowTableComponent {
 
   previousPage() {
     if (this.currentPage > 1) this.currentPage--;
-  }
-  sanitizeSvg(svg: string): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(svg);
-  }
-  isSvg(label: string): boolean {
-    return label.trim().startsWith('<svg');
   }
 }
