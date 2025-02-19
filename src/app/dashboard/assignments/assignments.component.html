@@ -1,1 +1,23 @@
-<p>assignments works!</p>
+<section class="py-4 flex flex-col gap-8">
+  <p class="text-2xl">Assignments</p>
+
+  <div class="flex flex-col gap-4">
+    <button
+      class="self-end w-[200px] bg-slate-800 rounded-md p-4 py-3 text-xs hover:cursor-pointer"
+    >
+      Create Assignment
+    </button>
+
+    <app-assign-flow-table
+      [title]="'Submitted Assignments'"
+      [headers]="['#', 'Name', 'Course', 'Status', 'File']"
+      [data]="assignments"
+      [actions]="[
+        { label: icons.view, callback: editUser },
+        { label: icons.delete, callback: deleteUser },
+        { label: icons.download, callback: deleteUser }
+      ]"
+      [isViewAll]="false"
+    />
+  </div>
+</section>
