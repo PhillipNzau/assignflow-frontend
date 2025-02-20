@@ -1,11 +1,11 @@
 <section class="py-4 flex flex-col gap-8">
   <div class="breadcrumbs max-w-xs text-lg md:text-xl">
     <ul>
-      <li>Assignments</li>
-      <li>Create</li>
+      <li>Print</li>
     </ul>
   </div>
 
+  <!-- Print section -->
   <div
     class="bg-slate-950 p-6 rounded-md min-h-[500px] flex flex-col justify-between"
   >
@@ -22,19 +22,19 @@
           class="step text-xs w-[100px]"
           [ngClass]="{ 'step-primary': currentStep >= 1 }"
         >
-          Unit Details
+          Delivery Details
         </li>
         <li
           class="step text-xs w-[100px]"
           [ngClass]="{ 'step-primary': currentStep >= 2 }"
         >
-          Class Info
+          Payment Details
         </li>
         <li
           class="step text-xs w-[100px]"
           [ngClass]="{ 'step-primary': currentStep >= 3 }"
         >
-          Deadline
+          Complete
         </li>
       </ul>
     </div>
@@ -42,7 +42,7 @@
     <!-- Step Form -->
     <form [formGroup]="form" class="flex flex-col items-center">
       <div *ngIf="currentStep === 0" class="md:w-1/2">
-        <div
+        <!-- <div
           class="md:w-full relative border-dotted h-48 rounded-lg border-2 border-primary bg-slate-900 flex justify-center items-center"
         >
           <div class="absolute">
@@ -64,12 +64,27 @@
                 <path d="M6 12v6" />
               </svg>
               <span class="block text-gray-500 font-normal"
-                >Attach you file here</span
+                >Attach your file here (PDF, DOCX)</span
               >
             </div>
           </div>
 
-          <input type="file" class="w-full opacity-0" name="" />
+          <input
+            type="file"
+            class="w-full opacity-0"
+            (change)="handleFileInput($event)"
+            accept=".pdf,.doc,.docx"
+          />
+        </div> -->
+        <input
+          type="file"
+          class="w-full opacity-"
+          (change)="handleFileInput($event)"
+          accept=".pdf,.doc,.docx"
+        />
+
+        <div *ngIf="pageCount !== null" class="mt-4 text-white">
+          <p>Page Count: {{ pageCount }}</p>
         </div>
       </div>
 

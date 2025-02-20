@@ -48,6 +48,11 @@ export const DASHBOARD_ROUTES: Route[] = [
           ),
       },
       {
+        path: 'print',
+        loadComponent: () =>
+          import('./print/print.component').then((m) => m.PrintComponent),
+      },
+      {
         path: '**',
         redirectTo: 'dashboard',
         pathMatch: 'full',
