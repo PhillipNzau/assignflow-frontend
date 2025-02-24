@@ -26,13 +26,16 @@ export class AssignmentsComponent {
     },
   ];
 
-  constructor(private route: Router) {}
-  // route = inject(Router);
+  constructor(private router: Router) {}
+  // router = inject(Router);
 
   editUser() {
-    console.log('well', this.route);
-    this.route.navigate(['/assignments']);
+    console.log('well', this.router);
+    this.router.navigate(['/assignments']);
   }
+  viewUser = (row: any) => {
+    this.router.navigate(['/assignments/' + row['#']]);
+  };
   deleteUser() {}
   downloadFile() {}
 }
