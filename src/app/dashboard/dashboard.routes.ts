@@ -22,12 +22,20 @@ export const DASHBOARD_ROUTES: Route[] = [
           ),
       },
       {
+        path: 'assignments/create',
+        loadComponent: () =>
+          import(
+            './assignments/components/create-assignements/create-assignements.component'
+          ).then((m) => m.CreateAssignementsComponent),
+      },
+      {
         path: 'assignments/:id',
         loadComponent: () =>
           import(
             './assignments/components/view-assignment/view-assignment.component'
           ).then((m) => m.ViewAssignmentComponent),
       },
+
       {
         path: 'profile',
         loadComponent: () =>
@@ -40,14 +48,6 @@ export const DASHBOARD_ROUTES: Route[] = [
             (m) => m.PaymentsComponent
           ),
       },
-      {
-        path: 'assignments/create',
-        loadComponent: () =>
-          import(
-            './assignments/components/create-assignements/create-assignements.component'
-          ).then((m) => m.CreateAssignementsComponent),
-      },
-
       {
         path: 'notifications',
         loadComponent: () =>
