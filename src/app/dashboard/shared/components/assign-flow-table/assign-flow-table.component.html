@@ -51,12 +51,16 @@
   </div>
 
   <!-- Pagination -->
-  <div class="flex justify-between items-center mt-4">
-    <button (click)="previousPage()" [disabled]="currentPage === 1">
+  <div class="flex justify-end gap-3 md:gap-6 items-center pt-6 pb-2 px-4">
+    <button class="btn" (click)="previousPage()" [disabled]="currentPage === 1">
       Previous
     </button>
     <span>Page {{ currentPage }} of {{ totalPages }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage >= totalPages">
+    <button
+      class="btn"
+      (click)="nextPage()"
+      [disabled]="currentPage >= totalPages"
+    >
       Next
     </button>
   </div>
