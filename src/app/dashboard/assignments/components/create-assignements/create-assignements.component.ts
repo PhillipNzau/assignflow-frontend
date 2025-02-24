@@ -7,10 +7,11 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-create-assignements',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
   templateUrl: './create-assignements.component.html',
   styleUrl: './create-assignements.component.css',
 })

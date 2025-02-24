@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { AssignFlowTableComponent } from '../../../shared/components/assign-flow-table/assign-flow-table.component';
 
 @Component({
   selector: 'app-view-assignment',
-  imports: [AssignFlowTableComponent],
+  imports: [AssignFlowTableComponent, RouterModule],
   templateUrl: './view-assignment.component.html',
   styleUrl: './view-assignment.component.css',
 })
