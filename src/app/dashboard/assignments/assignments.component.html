@@ -1,1 +1,35 @@
-<p>assignments works!</p>
+<section class="py-4 flex flex-col gap-8 mb-20">
+  <div class="breadcrumbs max-w-xs text-lg md:text-xl">
+    <ul>
+      <li>Assignments</li>
+    </ul>
+  </div>
+
+  <div class="flex items-center justify-end gap-6">
+    <button
+      class="self-end w-[200px] bg-slate-800 rounded-md p-4 py-3 text-xs hover:cursor-pointer"
+      [routerLink]="['/assignments/create']"
+    >
+      Create Assignment
+    </button>
+    <fieldset class="fieldset w-[30p]">
+      <select class="select w-full bg-transparent" formControlName="school">
+        <option disabled selected>Select Class</option>
+        <option>CES</option>
+        <option>EEE</option>
+        <option>MBA</option>
+      </select>
+    </fieldset>
+  </div>
+
+  <app-assign-flow-table
+    [title]="'Submitted Assignments'"
+    [headers]="['#', 'Name', 'Course', 'Status', 'File']"
+    [data]="assignments"
+    [actions]="[
+      { label: 'view', callback: viewUser },
+      { label: 'download', callback: deleteUser }
+    ]"
+    [isViewAll]="false"
+  />
+</section>

@@ -1,0 +1,176 @@
+<section class="py-4 flex flex-col gap-8 mb-20">
+  <div class="breadcrumbs max-w-xs text-lg md:text-xl">
+    <ul>
+      <li>Print</li>
+    </ul>
+  </div>
+
+  <!-- Print section -->
+  <div
+    class="bg-slate-950 p-6 rounded-md min-h-[500px] flex flex-col justify-between"
+  >
+    <!-- Step Indicator -->
+    <div class="flex justify-center mb-6">
+      <ul class="steps mb-6">
+        <li
+          class="step text-xs w-[100px]"
+          [ngClass]="{ 'step-primary': currentStep >= 0 }"
+        >
+          Upload File
+        </li>
+        <li
+          class="step text-xs w-[100px]"
+          [ngClass]="{ 'step-primary': currentStep >= 1 }"
+        >
+          Delivery Details
+        </li>
+        <li
+          class="step text-xs w-[100px]"
+          [ngClass]="{ 'step-primary': currentStep >= 2 }"
+        >
+          Payment Details
+        </li>
+        <li
+          class="step text-xs w-[100px]"
+          [ngClass]="{ 'step-primary': currentStep >= 3 }"
+        >
+          Complete
+        </li>
+      </ul>
+    </div>
+
+    <!-- Step Form -->
+    <form [formGroup]="form" class="flex flex-col items-center">
+      <div *ngIf="currentStep === 0" class="md:w-1/2">
+        <!-- <div
+          class="md:w-full relative border-dotted h-48 rounded-lg border-2 border-primary bg-slate-900 flex justify-center items-center"
+        >
+          <div class="absolute">
+            <div class="flex flex-col items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="stroke-primary"
+              >
+                <path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4" />
+                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                <path d="M3 15h6" />
+                <path d="M6 12v6" />
+              </svg>
+              <span class="block text-gray-500 font-normal"
+                >Attach your file here (PDF, DOCX)</span
+              >
+            </div>
+          </div>
+
+          <input
+            type="file"
+            class="w-full opacity-0"
+            (change)="handleFileInput($event)"
+            accept=".pdf,.doc,.docx"
+          />
+        </div> -->
+        <input
+          type="file"
+          class="w-full opacity-"
+          (change)="handleFileInput($event)"
+          accept=".pdf,.doc,.docx"
+        />
+
+        <div *ngIf="pageCount !== null" class="mt-4 text-white">
+          <p>Page Count: {{ pageCount }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 1" class="md:w-1/2 w-full">
+        <fieldset class="fieldset md:w-[500px]">
+          <legend class="fieldset-legend text-gray-200">Unit Name</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="name"
+            placeholder="Unit Name"
+          />
+        </fieldset>
+        <fieldset class="fieldset md:w-[500px]">
+          <legend class="fieldset-legend text-gray-200">Unit Code</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="code"
+            placeholder="Unit Code"
+          />
+        </fieldset>
+      </div>
+
+      <div *ngIf="currentStep === 2" class="md:w-1/2 w-full">
+        <fieldset class="fieldset md:w-[500px]">
+          <legend class="fieldset-legend text-gray-200">Course Name</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="cName"
+            placeholder="Course Name"
+          />
+        </fieldset>
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Select Year</legend>
+          <select class="select w-full bg-transparent" formControlName="school">
+            <option disabled selected>Select Year</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </fieldset>
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend text-gray-200">Select Semester</legend>
+          <select class="select w-full bg-transparent" formControlName="school">
+            <option disabled selected>Select Semester</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </fieldset>
+      </div>
+
+      <div *ngIf="currentStep === 3" class="md:w-1/2 w-full">
+        <fieldset class="fieldset md:w-[500px]">
+          <legend class="fieldset-legend text-gray-200">Unit Name</legend>
+          <input
+            class="input w-full bg-transparent"
+            formControlName="name"
+            placeholder="Unit Name"
+          />
+        </fieldset>
+      </div>
+    </form>
+
+    <!-- Navigation Buttons -->
+    <div class="flex justify-between mt-6">
+      <button
+        (click)="prevStep()"
+        [disabled]="currentStep === 0"
+        class="btn bg-slate-800 text-white rounded"
+      >
+        Previous
+      </button>
+      <button
+        (click)="nextStep()"
+        *ngIf="currentStep < steps.length - 1"
+        class="btn btn-primary rounded"
+      >
+        Next
+      </button>
+      <button
+        (click)="submitForm()"
+        *ngIf="currentStep === steps.length - 1"
+        class="px-4 py-2 bg-primary text-white rounded"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,92 @@
+<section class="py-4 flex flex-col gap-8 mb-20">
+  <div class="breadcrumbs max-w-sm text-lg md:text-xl">
+    <ul>
+      <li [routerLink]="'/assignments'" class="hover:cursor-pointer">
+        Assignments
+      </li>
+      <li>Viewing Assignment {{ currentRoute }}</li>
+    </ul>
+  </div>
+
+  <div
+    class="bg-slate-950 p-6 rounded-md md:min-h-[200px] flex flex-col justify-between"
+  >
+    <!-- Assignment details -->
+    <div class="flex flex-col gap-5">
+      <h2 class="text-2xl font-bold text-white">Intro to CS</h2>
+      <p class="text-base text-gray-500">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, sint
+        unde? Aut harum voluptate expedita molestiae magni modi, consequuntur
+        voluptates.
+      </p>
+
+      <!-- file  -->
+      <div
+        class="flex flex-col md:flex-row justify-between md:mt-10 mt-4 gap-6"
+      >
+        <div class="flex flex-col gap-2 md:w-sm">
+          <div
+            class="flex items-center justify-between md:min-w-sm md:min-h-sm"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="0.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-files"
+            >
+              <path d="M20 7h-3a2 2 0 0 1-2-2V2" />
+              <path
+                d="M9 18a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7l4 4v10a2 2 0 0 1-2 2Z"
+              />
+              <path d="M3 7.6v12.8A1.6 1.6 0 0 0 4.6 22h9.8" />
+            </svg>
+            <button
+              data-ripple-light="true"
+              class="btn rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none hover:bg-slate-700 ml-2"
+              type="button"
+            >
+              Download Assignment
+            </button>
+          </div>
+
+          <p class="text-sm flex justify-between text-gray-500">
+            File Name:
+            <span class="text-gray-400">introduction-cs.pdf</span>
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-2 md:w-sm">
+          <p class="text-sm flex justify-between text-gray-500">
+            Course Code: <span class="text-gray-400">COHRED-0101</span>
+          </p>
+          <p class="text-sm flex justify-between text-gray-500">
+            Date:
+            <span class="text-gray-400"> 01-01-2025</span>
+          </p>
+          <p class="text-sm flex justify-between text-gray-500">
+            Duration:
+            <span class="text-gray-400">3 weeks</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-slate-950 p-6 rounded-md md:min-h-min flex flex-col justify-between"
+  >
+    <app-assign-flow-table
+      [title]="'Submitted Assignments'"
+      [headers]="['#', 'Name', 'Course', 'Status', 'File']"
+      [data]="assignments"
+      [isViewAll]="false"
+      [actions]="[{ label: 'download', callback: donwloadFile }]"
+    />
+  </div>
+</section>
