@@ -1,1 +1,75 @@
-<p>notifications works!</p>
+<section class="py-4 flex flex-col gap-8 mb-20">
+  <div class="breadcrumbs max-w-xs text-lg md:text-xl">
+    <ul>
+      <li class="hover:cursor-pointer">Notifications</li>
+    </ul>
+  </div>
+
+  <ul class="timeline timeline-vertical">
+    <li *ngFor="let notification of notifications; let i = index">
+      <hr *ngIf="i !== 0" />
+
+      <!-- Notification Message -->
+      <div
+        class="timeline-start timeline-box bg-slate-950 border-slate-700 shadow-lg p-4 rounded-lg w-full flex items-center justify-between"
+      >
+        <div class="flex items-center space-x-3">
+          <div
+            class="w-10 h-10 rounded-full bg-slate-500 flex items-center justify-center text-white font-bold"
+          >
+            {{ notification.icon }}
+          </div>
+          <div>
+            <p class="text-gray-400">
+              <strong>{{ notification.title }}</strong>
+              {{ notification.message }}
+            </p>
+            <p class="text-sm text-gray-600">{{ notification.time }}</p>
+          </div>
+        </div>
+        <div *ngIf="notification.action" class="flex space-x-2">
+          <button
+            *ngIf="notification.action.confirm"
+            class="text-green-600 font-semibold"
+          >
+            Confirm
+          </button>
+          <button
+            *ngIf="notification.action.decline"
+            class="text-red-600 font-semibold"
+          >
+            Decline
+          </button>
+          <a
+            *ngIf="notification.action.link"
+            [href]="notification.action.link"
+            class="text-blue-600 font-semibold"
+          >
+            Go to the Challenge
+          </a>
+        </div>
+      </div>
+
+      <!-- Timeline Icon -->
+      <div class="timeline-middle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="h-5 w-5 text-blue-500"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
+
+      <!-- Date -->
+      <div class="timeline-end text-gray-500 text-sm font-medium">
+        {{ notification.date }}
+      </div>
+    </li>
+  </ul>
+</section>
