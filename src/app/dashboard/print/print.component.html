@@ -40,9 +40,9 @@
     </div>
 
     <!-- Step Form -->
-    <form [formGroup]="form" class="flex flex-col items-center">
+    <form [formGroup]="deliveryForm" class="flex flex-col items-center">
       <div *ngIf="currentStep === 0" class="md:w-1/2">
-        <!-- <div
+        <div
           class="md:w-full relative border-dotted h-48 rounded-lg border-2 border-primary bg-slate-900 flex justify-center items-center"
         >
           <div class="absolute">
@@ -63,9 +63,11 @@
                 <path d="M3 15h6" />
                 <path d="M6 12v6" />
               </svg>
-              <span class="block text-gray-500 font-normal"
-                >Attach your file here (PDF, DOCX)</span
-              >
+              <span class="block text-gray-500 font-normal">{{
+                fileName === undefined
+                  ? "Attach your file here (PDF, DOCX)"
+                  : fileName
+              }}</span>
             </div>
           </div>
 
@@ -73,15 +75,9 @@
             type="file"
             class="w-full opacity-0"
             (change)="handleFileInput($event)"
-            accept=".pdf,.doc,.docx"
+            accept=".pdf"
           />
-        </div> -->
-        <input
-          type="file"
-          class="w-full opacity-"
-          (change)="handleFileInput($event)"
-          accept=".pdf"
-        />
+        </div>
 
         <div *ngIf="pageCount !== null" class="mt-4 text-white">
           <p>Page Count: {{ pageCount }}</p>
@@ -90,59 +86,61 @@
 
       <div *ngIf="currentStep === 1" class="md:w-1/2 w-full">
         <fieldset class="fieldset md:w-[500px]">
-          <legend class="fieldset-legend text-gray-200">Unit Name</legend>
+          <legend class="fieldset-legend text-gray-200">First Name</legend>
           <input
+            type="text"
             class="input w-full bg-transparent"
             formControlName="name"
             placeholder="Unit Name"
           />
         </fieldset>
         <fieldset class="fieldset md:w-[500px]">
-          <legend class="fieldset-legend text-gray-200">Unit Code</legend>
+          <legend class="fieldset-legend text-gray-200">Phone Number</legend>
           <input
+            type="tel"
             class="input w-full bg-transparent"
-            formControlName="code"
-            placeholder="Unit Code"
+            formControlName="phone"
+            placeholder="Phone Number"
           />
+        </fieldset>
+
+        <fieldset class="fieldset md:w-[500px]">
+          <legend class="fieldset-legend text-gray-200">Location</legend>
+          <select
+            class="input w-full bg-transparent"
+            formControlName="location"
+          >
+            <option value="" disabled selected>Select delivery location</option>
+            @for (loc of locations; track $index) {
+            <option [value]="loc">
+              {{ loc }}
+            </option>
+            }
+          </select>
         </fieldset>
       </div>
 
       <div *ngIf="currentStep === 2" class="md:w-1/2 w-full">
-        <fieldset class="fieldset md:w-[500px]">
-          <legend class="fieldset-legend text-gray-200">Course Name</legend>
-          <input
-            class="input w-full bg-transparent"
-            formControlName="cName"
-            placeholder="Course Name"
-          />
-        </fieldset>
-        <fieldset class="fieldset w-full">
-          <legend class="fieldset-legend text-gray-200">Select Year</legend>
-          <select class="select w-full bg-transparent" formControlName="school">
-            <option disabled selected>Select Year</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-          </select>
-        </fieldset>
-        <fieldset class="fieldset w-full">
-          <legend class="fieldset-legend text-gray-200">Select Semester</legend>
-          <select class="select w-full bg-transparent" formControlName="school">
-            <option disabled selected>Select Semester</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-          </select>
-        </fieldset>
+        <p class="text-center">
+          Kindly send via M-pesa:
+          <span class="font-bold text-lg">KES {{ totalPay }}</span> to
+          <span class="font-bold text-lg"> 0790861160</span>
+        </p>
       </div>
 
       <div *ngIf="currentStep === 3" class="md:w-1/2 w-full">
+        <p class="text-center">
+          Kindly paste the M-pesa Transaction code below:
+        </p>
         <fieldset class="fieldset md:w-[500px]">
-          <legend class="fieldset-legend text-gray-200">Unit Name</legend>
+          <legend class="fieldset-legend text-gray-200">
+            Transaction Code
+          </legend>
           <input
+            type="text"
             class="input w-full bg-transparent"
-            formControlName="name"
-            placeholder="Unit Name"
+            formControlName="tCode"
+            placeholder="Transaction Code"
           />
         </fieldset>
       </div>
@@ -161,13 +159,15 @@
         (click)="nextStep()"
         *ngIf="currentStep < steps.length - 1"
         class="btn btn-primary rounded"
+        [disabled]="!isStepValid()"
       >
         Next
       </button>
       <button
         (click)="submitForm()"
         *ngIf="currentStep === steps.length - 1"
-        class="px-4 py-2 bg-primary text-white rounded"
+        class="btn btn-primary rounded"
+        [disabled]="!isStepValid()"
       >
         Submit
       </button>

@@ -20,7 +20,6 @@ export class PrintService {
       map((res: any) => {
         if (res.status === 200) {
           localStorage.setItem('pageCount', res.pageCount);
-
           return res;
         }
       })

@@ -24,17 +24,42 @@ import { PrintService } from '../shared/services/print.service';
   styleUrl: './print.component.css',
 })
 export class PrintComponent {
-  form: FormGroup;
+  deliveryForm: FormGroup;
   currentStep = 0;
   steps = ['Upload File', 'Delivery Details', 'Payment', 'Complete'];
-  pageCount: number | null = null;
+  pageCount: number | any;
+  fileName: string | undefined = undefined;
+
+  locations: string[] = ['Gate A', 'Gate C', 'Gate B'];
+  totalPay: number = 0;
 
   constructor(private fb: FormBuilder, private printService: PrintService) {
-    this.form = this.fb.group({
+    this.deliveryForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+
+      location: ['', Validators.required],
+      tCode: ['', Validators.required],
     });
+  }
+
+  isStepValid(): boolean {
+    switch (this.currentStep) {
+      case 0:
+        return !!this.fileName; // Ensure file is uploaded
+      case 1:
+        return (
+          this.deliveryForm.get('name')!.valid &&
+          this.deliveryForm.get('phone')!.valid &&
+          this.deliveryForm.get('location')!.valid
+        );
+      case 2:
+        return true; // Payment step does not require form validation
+      case 3:
+        return this.deliveryForm.get('tCode')!.valid;
+      default:
+        return false;
+    }
   }
 
   nextStep() {
@@ -46,10 +71,10 @@ export class PrintComponent {
   }
 
   submitForm() {
-    if (this.form.valid) {
-      alert('Form Submitted!');
+    if (this.deliveryForm.valid) {
+      alert('Delivery Form Submitted!');
     } else {
-      this.form.markAllAsTouched();
+      this.deliveryForm.markAllAsTouched();
     }
   }
 
@@ -57,9 +82,11 @@ export class PrintComponent {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput.files?.[0];
     if (file) {
+      this.fileName = file.name;
       this.printService.getPageCount(file).subscribe({
         next: (count) => {
           this.pageCount = count.pageCount;
+          this.totalPay = this.pageCount * 20;
         },
         error: (error) => {
           console.error(error);
