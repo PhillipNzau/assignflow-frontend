@@ -10,6 +10,7 @@ import {
 
 import * as pdfjsLib from 'pdfjs-dist';
 import * as mammoth from 'mammoth';
+import { PrintService } from '../shared/services/print.service';
 
 (
   pdfjsLib as any
@@ -26,8 +27,9 @@ export class PrintComponent {
   form: FormGroup;
   currentStep = 0;
   steps = ['Upload File', 'Delivery Details', 'Payment', 'Complete'];
+  pageCount: number | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private printService: PrintService) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -50,24 +52,19 @@ export class PrintComponent {
       this.form.markAllAsTouched();
     }
   }
-  pageCount: number | null = null;
 
   async handleFileInput(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (!input.files || input.files.length === 0) return;
-
-    const file = input.files[0];
-    const fileType = file.name.split('.').pop()?.toLowerCase();
-
-    if (fileType === 'pdf') {
-      console.log('file', await this.countPdfPages(file));
-
-      this.pageCount = await this.countPdfPages(file);
-    } else if (fileType === 'docx') {
-      this.pageCount = await this.countDocxPages(file);
-    } else {
-      alert('Invalid file type. Only PDF and DOCX are allowed.');
-      input.value = ''; // Reset input
+    const fileInput = event.target as HTMLInputElement;
+    const file = fileInput.files?.[0];
+    if (file) {
+      this.printService.getPageCount(file).subscribe({
+        next: (count) => {
+          this.pageCount = count.pageCount;
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
     }
   }
 
